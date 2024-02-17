@@ -1,0 +1,7 @@
+node_modules
+dist
+src/styles/input.css
+serverjs
+.env
+# Local Netlify folder
+.netlify
