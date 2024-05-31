@@ -8,6 +8,7 @@ module.exports = {
 		path: path.resolve(__dirname, 'dist'),
 		filename: 'main.js',
 		globalObject: 'this',
+		publicPath: '/',
 	},
 	module: {
 		rules: [
@@ -19,8 +20,9 @@ module.exports = {
 				},
 			},
 			{
-				test: /\.css/,
-				use: ['style-loader', 'css-loader'],
+				test: /\.css$/i,
+				include: path.resolve(__dirname, 'src'),
+				use: ['style-loader', 'css-loader', 'postcss-loader'],
 			},
 			{
 				test: /\.(ts|tsx)$/,
@@ -42,12 +44,25 @@ module.exports = {
 	},
 	plugins: [
 		new HtmlWebpackPlugin({
-			favicon: 'src/favicon.ico',
+			// favicon: 'src/favicon.ico',
 			template: 'src/index.html',
 			publicPath: '/',
 		}),
 	],
 	devServer: {
-		static: path.resolve(__dirname, 'dist'),
+		static: {
+			directory: path.resolve(__dirname, 'dist'),
+		},
+		port: 3000,
+		open: true,
+		hot: true,
+		compress: true,
+		historyApiFallback: true,
+		proxy: [
+			{
+				context: ['/'],
+				target: 'http://localhost:8888',
+			},
+		],
 	},
 };

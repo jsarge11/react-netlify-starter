@@ -1,2 +1,9 @@
 [build]
-    functions = "functions"
+  command = "yarn build"
+  publish = "dist"
+  functions = "functions"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
