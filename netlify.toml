@@ -3,7 +3,14 @@
   publish = "dist"
   functions = "functions"
 
+[functions]
+  directory = "functions/api"
+
+[dev]
+  autoLaunch = false
+
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
+

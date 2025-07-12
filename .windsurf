@@ -1,0 +1,15 @@
+1. I'm using mongodb
+2. I'm deploying to netlify
+3. Use Yarn
+4. When writing unit tests, finish the initial request completely, and then step through the test with me showing me what it does (don't change / add anything with tests until approved)
+5. Never assume, if you don't know something ask (unless file structure).
+6. Use TypeScript.
+7. Use ts-node for running scripts.
+8. Use mobile-first design
+9. Don't use dotenv, destructure from process.env
+10. Don't ask about file structure if unsure, go figure it out.
+11. Don't try to run commands to start the app, I'll do that myself.
+12. Don't use default exports. All named.
+13. Follow existing patterns.
+14. Ignore linting rules, only fix errors.
+<!-- 15. Add Styling Suggestion Here -->

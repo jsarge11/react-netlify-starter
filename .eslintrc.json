@@ -6,7 +6,8 @@
 	},
 	"settings": {
 		"react": {
-			"version": "detect"
+			"version": "detect",
+			"runtime": "automatic"
 		}
 	},
 	"parser": "@typescript-eslint/parser",
@@ -25,32 +26,61 @@
 	},
 	"plugins": ["react", "@typescript-eslint"],
 	"rules": {
+		"react/prop-types": "off",
 		"react/jsx-key": "warn",
 		"@typescript-eslint/no-empty-interface": "off",
 		"no-unused-vars": "off",
 		"no-mixed-spaces-and-tabs": "off",
-		"@typescript-eslint/no-unused-vars": ["warn"],
+		"@typescript-eslint/no-unused-vars": [
+			"warn",
+			{
+				"argsIgnorePattern": "^_",
+				"varsIgnorePattern": "^_"
+			}
+		],
+		"react/react-in-jsx-scope": "off",
+		"react/jsx-uses-react": "off",
 		"no-console": ["warn", { "allow": ["warn", "error"] }],
 		"react/jsx-sort-props": [
 			"warn",
 			{
 				"callbacksLast": true
 			}
+		],
+		"@typescript-eslint/no-explicit-any": "off",
+		"no-duplicate-imports": ["warn", { "includeExports": true }],
+		"sort-imports": [
+			"warn",
+			{
+				"ignoreCase": true,
+				"ignoreDeclarationSort": true,
+				"ignoreMemberSort": false,
+				"memberSyntaxSortOrder": ["none", "all", "multiple", "single"],
+				"allowSeparatedGroups": true
+			}
 		]
 	},
 	"overrides": [
 		{
-		  "files": ["*.ts", "*.tsx"],
-		  "parserOptions": {
-			"project": ["./tsconfig.json"]
-		  }
+			"files": ["*.ts", "*.tsx"],
+			"parserOptions": {
+				"project": ["./tsconfig.json"]
+			}
 		},
 		{
 			"files": ["*.js"],
 			"rules": {
 				"@typescript-eslint/no-var-requires": "off"
 			}
+		},
+		{
+			"files": ["functions/**/*.js"],
+			"plugins": ["node"],
+			"extends": ["plugin:node/recommended"],
+			"rules": {
+				"node/no-missing-require": "error"
+			}
 		}
-	  ],
+	],
 	"ignorePatterns": "*.config.js"
 }

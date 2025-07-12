@@ -1,5 +1,6 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const TsConfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const path = require('path');
 
 module.exports = {
@@ -13,7 +14,7 @@ module.exports = {
 	module: {
 		rules: [
 			{
-				test: /\.js/,
+				test: /\.js$/,
 				exclude: /node_modules/,
 				use: {
 					loader: 'babel-loader',
@@ -35,18 +36,26 @@ module.exports = {
 		],
 	},
 	resolve: {
-		extensions: ['.js', '.json', '.ts', '.tsx'],
+		extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
+		alias: {
+			'@types': path.resolve(__dirname, 'src/types/'),
+		},
 		plugins: [
 			new TsConfigPathsPlugin({
-				extensions: ['.js', '.json', '.ts', '.tsx'],
+				configFile: path.resolve(__dirname, 'tsconfig.json'),
+				extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
 			}),
 		],
 	},
 	plugins: [
 		new HtmlWebpackPlugin({
-			// favicon: 'src/favicon.ico',
 			template: 'src/index.html',
 			publicPath: '/',
+		}),
+		new ForkTsCheckerWebpackPlugin({
+			issue: {
+				exclude: [{ severity: 'error' }],
+			},
 		}),
 	],
 	devServer: {
